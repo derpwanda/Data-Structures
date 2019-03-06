@@ -23,13 +23,13 @@
 
 
 # linked list style
-class Node:
-    def __init__(self, init_data=None, next_node=None):
-        self.init_data = init_data
+class Node():
+    def __init__(self, data=None, next_node=None):
+        self.data = data
         self.next_node = next_node
 
     def getData(self):
-        return self.init_data
+        return self.data
 
     def getNext(self):
         return self.next_node
@@ -41,7 +41,7 @@ class Node:
         self.new_node = new_node
 
 
-class Queue:
+class Queue():
     def __init__(self, head=None):
         self.head = head
         self.size = 0
@@ -91,4 +91,3 @@ q.enqueue("User04")
 q.enqueue("User05")
 
 q.print_queue()
-print(len(q))
