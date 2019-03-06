@@ -82,13 +82,16 @@ class Queue():
         print(self.temp)
 
 q = Queue()
-
+print(f"after initializing empty q", q.print_queue())
+print(q.len())
 q.enqueue("User01")
+print(q.len())
 q.enqueue("User02")
 q.enqueue("User03")
 q.enqueue("User04")
 q.enqueue("User05")
+print(f"after adding 5 nodes", q.print_queue())
+print(f"size after add 5", q.len())
 
 q.dequeue()
-
 q.print_queue()
