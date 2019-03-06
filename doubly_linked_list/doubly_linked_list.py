@@ -61,9 +61,9 @@ class DoublyLinkedList:
 
   def move_to_end(self, node):
     pass
-    # reassign pointers prev/next
+    # reassign pointers of node's prev/next
     # make node tail, then point old tail next to newtail, point new tail prev to old tail
-    node.prev.next
+
 
   def delete(self, node):
     pass
