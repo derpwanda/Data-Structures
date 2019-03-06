@@ -1,4 +1,3 @@
-from linkedlist import LinkedList
 
 # array style
 """ class Queue:
@@ -91,20 +90,18 @@ class Queue():
         self.storage = LinkedList(head, tail)
 
     def enqueue(self, item):
-        # new_node = Node(item)
-        # current = self.head
-
-        # if current is None:
-        #     self.head = new_node
-        #     self.size += 1
-        # else:
-        #     while current.getNext():
-        #             current = current.getNext()
-        #     current.setNext(new_node)
 
         new_node = Node(item)
-        self.storage.tail.next_node = new_node
-        self.storage.tail = new_node
+        current = self.storage.head
+
+        if current is None:
+            self.storage.head = new_node
+            self.size += 1
+        else:
+            while current.next_node is not None:
+                current = current.next_node
+            self.storage.tail.next_node = new_node  # reassign oldtail pointer
+            self.storage.tail = new_node  # reassign the tail
 
     def dequeue(self):
         # current = self.head
@@ -123,15 +120,15 @@ class Queue():
     def len(self):
         return self.size
 
-    def print_queue(self):
+"""     def print_queue(self):
         current = self.head
         self.temp = []
         while current:
-            self.temp.append(current.getData())
-            current = current.getNext()
+            self.temp.append(current.value)
+            current = current.next_node
         print(self.temp)
 
-q = Queue()
+q = Queue(None, None)
 
 q.enqueue("User01")
 q.enqueue("User02")
@@ -139,4 +136,4 @@ q.enqueue("User03")
 q.enqueue("User04")
 q.enqueue("User05")
 
-q.print_queue()
+q.print_queue() """
