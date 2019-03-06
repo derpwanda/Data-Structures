@@ -49,7 +49,7 @@ class Queue:
         # use to store queue elements?
 
         # we will use a  since Queue is similar (but not the same) as Stack
-        self.storage = []
+        # self.storage = []
 
     def enqueue(self, item):
         new_node = Node(item)
@@ -61,16 +61,34 @@ class Queue:
         else:
             while current.getNext():
                     current = current.getNext()
-                    self.size += 1
             current.setNext(new_node)
 
     def dequeue(self):
         current = self.head
         if current is not None:
             self.head = current.getNext()
-            self.size += 1
+            self.size -= 1
         else:
-            print("Queue is empty!")
+            return None
 
     def len(self):
         return self.size
+
+    def print_queue(self):
+        current = self.head
+        self.temp = []
+        while current:
+            self.temp.append(current.getData())
+            current = current.getNext()
+        print(self.temp)
+
+q = Queue()
+
+q.enqueue("User01")
+q.enqueue("User02")
+q.enqueue("User03")
+q.enqueue("User04")
+q.enqueue("User05")
+
+q.print_queue()
+print(len(q))
