@@ -4,14 +4,13 @@ class Heap:
 
     def insert(self, value):
         self.storage.append(value)
-
-        self._bubble_up(len(self.storage) - 1
+        self._bubble_up(len(self.storage) - 1)
 
     def delete(self):
         # if storage exists and is filled with something
         if self.storage:
-            self.storage.pop(0)
-        return
+            return self.storage.pop(0)
+        print(self.storage.pop(0))
         # then i have to get the heap balanced again
         self._sift_down(self.storage)
 
@@ -35,34 +34,61 @@ class Heap:
         #       bubble_up(self, old_parent_index/new_index)
         # 2. if its LESS than
         #   return
-        parent=(index - 1)//2
-        # left_child = (index * 2)+1
-        # right_child = (index * 2)+2
+        parent = (index - 1)//2
+
         # print("before loop", self.storage)
         for i in range(len(self.storage) - 1):
             if index == 0:
                 return
             else:
                 while index > 0 and self.storage[parent] < self.storage[index]:
-                    self.storage[index], self.storage[parent]=self.storage[parent], self.storage[index]
+                    self.storage[index], self.storage[parent] = self.storage[parent], self.storage[index]
 
-                    index=parent
-                    parent=(index - 1)//2
+                    index = parent
+                    parent = (index - 1)//2
         # print("after loop", self.storage)
 
     def _sift_down(self, index):
-        parent=(index - 1)//2
-        left_child=(index * 2)+1
-        right_child=(index * 2)+2
-        # after removing root element, take final element in array
-        # move it to beggining (root position) and compare to left and right
-        # children
+        parent = (index - 1)//2
+        left_child = (index * 2)+1
+        right_child = (index * 2)+2
+        # _sift_down grabs the indices of this element's children and determines which child has a larger value. If the larger child's value is larger than the parent's value, the child element is swapped with the parent.
 
-        #  1. if element has no children, STOP
-        #  2. if element LESS than the max child
+        #  1. if index has no children, STOP
+        #  2. if index LESS than the max child
         #       swap with the max child
         #
-        pass
+        lenofarray = len(self.storage) - 1
+
+        for i in range(lenofarray):
+            if self.storage[left_child] and self.storage[right_child]:
+                if self.storage[left_child] > self.storage[right_child]:
+                    self.storage[left_child], self.storage[index] = self.storage[index], self.storage[left_child]
+                    index = left_child
+                    left_child = (index * 2)+1
+                else:
+                    self.storage[right_child], self.storage[index] = self.storage[index], self.storage[right_child]
+                    index = right_child
+                    right_child = (index * 2)+2
+            elif self.storage[left_child] and self.storage[left_child] > self.storage[index]:
+                self.storage[left_child], self.storage[index] = self.storage[index], self.storage[left_child]
+                index = left_child
+                left_child = (index * 2)+2
+            elif self.storage[right_child] and self.storage[right_child] > self.storage[index]:
+                self.storage[right_child], self.storage[index] = self.storage[index], self.storage[right_child]
+                index = left_child
+                right_child = (index * 2)+2
+
+        # if left_child exists and right_child exist:
+        #   if left > right:
+        #   use left
+        #   otherwise use right
+        # if right_side exists
+        #   and is larger than index
+        #   swap
+        # if left_child exists
+        #   and is larger than index
+        #   swap
 
 
 # arr = [94, 77, 75, 43, 51, 48, 53, 29, 35, 26]
