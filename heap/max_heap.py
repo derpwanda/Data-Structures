@@ -9,15 +9,19 @@ class Heap:
     def delete(self):
         # if storage exists and is filled with something
         if self.storage:
-            return self.storage.pop(0)
-        print(self.storage.pop(0))
+            root = self.storage[0]
+            self.storage[0] = self.storage[len(self.storage) - 1]
+            self.storage.pop()
+            self._sift_down(0)  # call siftdown on the first element in array
+            return root
+        #print(f"delete", self.storage.pop(0))
         # then i have to get the heap balanced again
-        self._sift_down(self.storage)
+        #print(len(self.storage)-1)
 
     def get_max(self):
         # if storage exists and is filled with something
         if self.storage:
-            self.storage[0]
+            return self.storage[0]
 
     def get_size(self):
         return len(self.storage)
@@ -46,40 +50,43 @@ class Heap:
 
                     index = parent
                     parent = (index - 1)//2
-        # print("after loop", self.storage)
+         # print("after loop", self.storage)
 
     def _sift_down(self, index):
         parent = (index - 1)//2
-        left_child = (index * 2)+1
-        right_child = (index * 2)+2
+        left_child = ((index * 2)+1)
+        right_child = ((index * 2)+2)
         # _sift_down grabs the indices of this element's children and determines which child has a larger value. If the larger child's value is larger than the parent's value, the child element is swapped with the parent.
 
         #  1. if index has no children, STOP
         #  2. if index LESS than the max child
         #       swap with the max child
-        #
+
         lenofarray = len(self.storage) - 1
+        print(index)
+        print(lenofarray)
+        while index < lenofarray:    
+            if left_child < lenofarray and ((index * 2)+2) < lenofarray:
+                if self.storage[(index * 2)+1] > self.storage[(index * 2)+2]:
+                    self.storage[(index * 2)+1], self.storage[index] = self.storage[index], self.storage[(index * 2)+1]
+                    index = (index * 2)+1
 
-        for i in range(lenofarray):
-            if self.storage[left_child] and self.storage[right_child]:
-                if self.storage[left_child] > self.storage[right_child]:
-                    self.storage[left_child], self.storage[index] = self.storage[index], self.storage[left_child]
-                    index = left_child
-                    left_child = (index * 2)+1
                 else:
-                    self.storage[right_child], self.storage[index] = self.storage[index], self.storage[right_child]
-                    index = right_child
-                    right_child = (index * 2)+2
-            elif self.storage[left_child] and self.storage[left_child] > self.storage[index]:
-                self.storage[left_child], self.storage[index] = self.storage[index], self.storage[left_child]
-                index = left_child
-                left_child = (index * 2)+2
-            elif self.storage[right_child] and self.storage[right_child] > self.storage[index]:
-                self.storage[right_child], self.storage[index] = self.storage[index], self.storage[right_child]
-                index = left_child
-                right_child = (index * 2)+2
+                    self.storage[(index * 2)+2], self.storage[index] = self.storage[index], self.storage[(index * 2)+2]
+                    index = (index * 2)+2
 
-        # if left_child exists and right_child exist:
+            elif ((index * 2)+1) < lenofarray and self.storage[((index * 2)+1)] > self.storage[index]:
+                self.storage[(index * 2)+1], self.storage[index] = self.storage[index], self.storage[(index * 2)+1]
+                index = (index * 2)+1
+
+            elif ((index * 2)+2) < lenofarray and self.storage[((index * 2)+2)] > self.storage[index]:
+                self.storage[(index * 2)+2], self.storage[index] = self.storage[index], self.storage[(index * 2)+2]
+                index = (index * 2)+2
+            else:
+                break
+
+
+        # if (index * 2)+1 exists and right_child exist:
         #   if left > right:
         #   use left
         #   otherwise use right
