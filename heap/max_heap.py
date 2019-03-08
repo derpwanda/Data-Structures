@@ -3,30 +3,30 @@ class Heap:
         self.storage = []
 
     def insert(self, value):
-        self.storage.append(value)
-        self._bubble_up(len(self.storage) - 1)
+        self.storage.append(value)  # add value to last item of array
+        self._bubble_up(len(self.storage) - 1)  # call the bubbleup last item in array
 
     def delete(self):
         # if storage exists and is filled with something
         if self.storage:
-            root = self.storage[0]
+            root = self.storage[0]  # the value of storage[0] at this moment
+            # make the value of root the value of the last item of array
             self.storage[0] = self.storage[len(self.storage) - 1]
+            # removes the last item of array (ie, the old root)
             self.storage.pop()
             self._sift_down(0)  # call siftdown on the first element in array
-            return root
-        #print(f"delete", self.storage.pop(0))
-        # then i have to get the heap balanced again
-        #print(len(self.storage)-1)
+            return root  #the original value of root
 
     def get_max(self):
         # if storage exists and is filled with something
         if self.storage:
+            # return the first value in storage
             return self.storage[0]
 
     def get_size(self):
         return len(self.storage)
 
-    def _bubble_up(self, index):    # index is given to us
+    def _bubble_up(self, index):    # index comes from insert()
         # after youve added to end of the heap and compare it up to the
         # correct position
         # recursive
@@ -49,7 +49,7 @@ class Heap:
                     index = parent
                     parent = (index - 1)//2
 
-    def _sift_down(self, index):
+    def _sift_down(self, index): # index comes from delete
 
         left_child = ((index * 2)+1)
         right_child = ((index * 2)+2)
@@ -60,8 +60,8 @@ class Heap:
         #       swap with the max child
 
         lenofarray = len(self.storage) - 1
-        print(index)
-        print(lenofarray)
+        # print(index)
+        # print(lenofarray)
         while index <= lenofarray:
             if ((index * 2)+1) <= lenofarray and ((index * 2)+2) <= lenofarray:
                 if self.storage[(index * 2)+1] >= self.storage[(index * 2)+2]:
@@ -81,27 +81,3 @@ class Heap:
                 index = (index * 2)+2
             else:
                 break
-
-
-# arr = [94, 77, 75, 43, 51, 48, 53, 29, 35, 26]
-
-# array = []
-# print(array)
-# array.append(5)
-# array.append(6)
-# array.append(8)
-# array.append(10)
-# array.append(1)
-# array.append(2)
-# array.append(5)
-# array.append(7)
-# print(array)
-
-# n = len(array)
-
-# for i in range(len(array)):
-#     parent = (index - 1)//2
-#     while index > 1 and array[parent] < array[index]:
-#         array[parent], array[index] = array[index], array[parent]
-
-# print(array)
