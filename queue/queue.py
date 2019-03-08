@@ -57,18 +57,27 @@ class Queue():
             # self.storage.head.next_node = self.storage.tail
             self.size += 1
         else:
-
             self.storage.tail.next_node = new_node  # reassign oldtail pointer
             self.storage.tail = new_node  # reassign the tail
             self.size += 1
 
     def dequeue(self):
 
-        prev_head = self.storage.head
-        self.storage.head = prev_head.next_node
-        # head reference/pointer updated
-        prev_head.next_node = None
-        return prev_head  # the node we dequeued
+        if self.size > 1:
+            temp = self.storage.head
+            self.storage.head = temp.next_node
+            # head reference/pointer updated
+            temp.next_node = None
+            self.size -= 1
+            return temp.value  # the node we dequeued
+        elif self.size == 1:
+            current = self.storage.head
+            self.storage.head = None
+            self.storage.tail = None
+            self.size -= 1
+            return current.value
+        else:
+            return
 
     def len(self):
         return self.size
@@ -81,7 +90,7 @@ class Queue():
             current = current.next_node
         print(self.temp)
 
-q = Queue()
+""" q = Queue()
 print(f"after initializing empty q", q.print_queue())
 print(q.len())
 q.enqueue("User01")
@@ -94,4 +103,4 @@ print(f"after adding 5 nodes", q.print_queue())
 print(f"size after add 5", q.len())
 
 q.dequeue()
-q.print_queue()
+q.print_queue() """
