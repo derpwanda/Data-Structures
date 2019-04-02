@@ -4,7 +4,8 @@ class Heap:
 
     def insert(self, value):
         self.storage.append(value)  # add value to last item of array
-        self._bubble_up(len(self.storage) - 1)  # call the bubbleup last item in array
+        # call the bubbleup last item in array
+        self._bubble_up(len(self.storage) - 1)
 
     def delete(self):
         # if storage exists and is filled with something
@@ -15,7 +16,7 @@ class Heap:
             # removes the last item of array (ie, the old root)
             self.storage.pop()
             self._sift_down(0)  # call siftdown on the first element in array
-            return root  #the original value of root
+            return root  # the original value of root
 
     def get_max(self):
         # if storage exists and is filled with something
@@ -49,7 +50,7 @@ class Heap:
                     index = parent
                     parent = (index - 1)//2
 
-    def _sift_down(self, index): # index comes from delete
+    def _sift_down(self, index):  # index comes from delete
 
         left_child = ((index * 2)+1)
         right_child = ((index * 2)+2)
@@ -65,19 +66,23 @@ class Heap:
         while index <= lenofarray:
             if ((index * 2)+1) <= lenofarray and ((index * 2)+2) <= lenofarray:
                 if self.storage[(index * 2)+1] >= self.storage[(index * 2)+2]:
-                    self.storage[(index * 2)+1], self.storage[index] = self.storage[index], self.storage[(index * 2)+1]
+                    self.storage[(
+                        index * 2)+1], self.storage[index] = self.storage[index], self.storage[(index * 2)+1]
                     index = (index * 2)+1
 
                 else:
-                    self.storage[(index * 2)+2], self.storage[index] = self.storage[index], self.storage[(index * 2)+2]
+                    self.storage[(
+                        index * 2)+2], self.storage[index] = self.storage[index], self.storage[(index * 2)+2]
                     index = (index * 2)+2
 
             elif ((index * 2)+1) <= lenofarray and self.storage[((index * 2)+1)] >= self.storage[index]:
-                self.storage[(index * 2)+1], self.storage[index] = self.storage[index], self.storage[(index * 2)+1]
+                self.storage[(
+                    index * 2)+1], self.storage[index] = self.storage[index], self.storage[(index * 2)+1]
                 index = (index * 2)+1
 
             elif ((index * 2)+2) <= lenofarray and self.storage[((index * 2)+2)] > self.storage[index]:
-                self.storage[(index * 2)+2], self.storage[index] = self.storage[index], self.storage[(index * 2)+2]
+                self.storage[(
+                    index * 2)+2], self.storage[index] = self.storage[index], self.storage[(index * 2)+2]
                 index = (index * 2)+2
             else:
                 break

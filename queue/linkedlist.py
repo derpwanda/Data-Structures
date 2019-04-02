@@ -42,8 +42,8 @@ class LinkedList:
 
     # delete the head
     def delete_from_head(self):
-        self.head = self.head.next_node
         # changes the designation of head to the next node
+        self.head = self.head.next_node
 
     # delete the tail
     def delete_from_tail(self, head, length):
