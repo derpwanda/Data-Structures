@@ -1,4 +1,3 @@
-
 # array style
 class Queue:
     def __init__(self):
@@ -91,7 +90,9 @@ class Queue():
         print(self.temp)
 
 q = Queue()
+
 print(f"after initializing empty q:", q.print_queue())
+
 print(q.len())
 q.enqueue("User01")
 print(f"after adding a user:", q.len())
