@@ -1,6 +1,5 @@
-
 # array style
-""" class Queue:
+class Queue:
     def __init__(self):
         self.size = 0
         # what data structure should we
@@ -20,7 +19,7 @@
 
     def len(self):
         self.size = len(self.storage)
-        return self.size """
+        return self.size
 
 
 # linked list style
@@ -90,7 +89,7 @@ class Queue():
             current = current.next_node
         print(self.temp)
 
-""" q = Queue()
+q = Queue()
 print(f"after initializing empty q", q.print_queue())
 print(q.len())
 q.enqueue("User01")
@@ -103,4 +102,4 @@ print(f"after adding 5 nodes", q.print_queue())
 print(f"size after add 5", q.len())
 
 q.dequeue()
-q.print_queue() """
+q.print_queue()
