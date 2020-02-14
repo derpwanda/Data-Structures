@@ -86,3 +86,22 @@ class Heap:
                 index = (index * 2)+2
             else:
                 break
+
+                    def _sift_down(self, index):
+        end = len(self.storage) - 1
+        child = index * 2 + 1
+ 
+    //alt sift down code
+    def _sift_down(self, index):  # index comes from delete
+        while child <= end:
+            rchild = child + 1
+            # check if rchild has higher priority than the left child
+            if rchild <= end and self.storage[rchild] > self.storage[child]:
+                child = rchild
+            # check if parent has lower priority than child 
+            if self.storage[child] > self.storage[index]:
+                self.storage[child], self.storage[index] = self.storage[index], self.storage[child]
+                index = child
+                child = 2 * index + 1
+            else:
+                break
